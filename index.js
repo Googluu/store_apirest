@@ -1,5 +1,6 @@
 const express = require("express");
-const { faker } = require("@faker-js/faker");
+
+const createRandomProducts = require("./data_faker/products_faker");
 
 const app = express();
 
@@ -12,13 +13,9 @@ app.get("/", (req, res) => {
 app.get("/products", (req, res) => {
   const { size } = req.query;
   const products = [];
-  const limit = size || 100;
+  const limit = size || 10;
   for (let i = 0; i < limit; i++) {
-    products.push({
-      name: faker.commerce.productName(),
-      price: parseInt(faker.commerce.price(), 10),
-      image: faker.image.imageUrl(),
-    });
+    products.push(createRandomProducts());
   }
   res.json(products);
 });
