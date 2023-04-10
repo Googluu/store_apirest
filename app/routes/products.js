@@ -1,32 +1,19 @@
 const express = require("express");
 
-const createRandomProducts = require("../../data_faker/products_faker");
+const ProductsService = require("../services/products.service");
 
 const router = express.Router();
+const service = new ProductsService();
 
-router.get("/", (req, res) => {
-  const { size } = req.query;
-  const products = [];
-  const limit = size || 10;
-  for (let i = 0; i < limit; i++) {
-    products.push(createRandomProducts());
-  }
+router.get("/", async (req, res) => {
+  const products = await service.findAll();
   res.json(products);
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", async (req, res) => {
   const { id } = req.params;
-  if (id === "999") {
-    res.status(404).json({
-      id,
-      message: "Product Not Found",
-    });
-  }
-  res.status(200).json({
-    id,
-    name: "product 2",
-    price: 1000,
-  });
+  const product = await service.findOne(id);
+  res.json(product);
 });
 
 router.post("/", (req, res) => {
