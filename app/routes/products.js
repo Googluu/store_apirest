@@ -16,7 +16,13 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  res.json({
+  if (id === "999") {
+    res.status(404).json({
+      id,
+      message: "Product Not Found",
+    });
+  }
+  res.status(200).json({
     id,
     name: "product 2",
     price: 1000,
@@ -25,7 +31,7 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
   const body = req.body;
-  res.json({
+  res.status(201).json({
     message: "Created",
     data: body,
   });
@@ -43,7 +49,7 @@ router.patch("/:id", (req, res) => {
 
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
-  res.json({
+  res.status(204).json({
     message: "Deleted",
     id,
   });
