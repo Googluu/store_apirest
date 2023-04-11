@@ -16,7 +16,7 @@ router.get("/:id", async (req, res, next) => {
     const product = await service.findOne(id);
     res.json(product);
   } catch (error) {
-    next(error);
+    next(error); //se agrega el next para atrapar de forma explicita el error con el middleware
   }
 });
 
