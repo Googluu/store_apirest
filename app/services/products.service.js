@@ -1,3 +1,5 @@
+const { faker } = require("@faker-js/faker");
+
 const createRandomProducts = require("../../data_faker/products_faker");
 
 class ProductsService {
@@ -13,7 +15,14 @@ class ProductsService {
     }
   }
 
-  create() {}
+  create(data) {
+    const newProduct = {
+      id: faker.datatype.uuid(),
+      ...data,
+    };
+    this.products.push(newProduct);
+    return newProduct;
+  }
 
   findAll() {
     return this.products;
@@ -23,9 +32,24 @@ class ProductsService {
     return this.products.find((item) => item.id === id);
   }
 
-  update() {}
+  async update(id, changes) {
+    const index = this.products.findIndex((item) => item.id === id);
+    if (index === -1) {
+      throw new Error("Product not found");
+    }
+    const product = this.products[index];
+    this.products[index] = {
+      ...product,
+      ...changes,
+    };
+    return this.products[index];
+  }
 
-  delete() {}
+  delete(id) {
+    const index = this.products.findIndex((item) => item.id === id);
+    if (index === -1) throw new Error("Product not found");
+    this.products.splice(index, 1);
+  }
 }
 
 module.exports = ProductsService;
