@@ -1,3 +1,5 @@
+const { isBoom } = require("@hapi/boom");
+
 //Creamos función que nos hará llegar a un middleware de tipo error:
 function logErrors(err, req, res, next) {
   console.log(err); //mostrar el error en servidor para poder monitorearlo
@@ -14,4 +16,11 @@ function errorHandler(err, req, res, next) {
   });
 }
 
-module.exports = { logErrors, errorHandler }; //exportarlo como modulo
+function boomErrorHandler(err, req, res, next) {
+  if (isBoom(err)) {
+    const { payload, statusCode } = err.output;
+    res.status(statusCode).json(payload);
+  } else next(err);
+}
+
+module.exports = { logErrors, errorHandler, boomErrorHandler }; //exportarlo como modulo
