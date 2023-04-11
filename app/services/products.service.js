@@ -1,4 +1,5 @@
 const { faker } = require("@faker-js/faker");
+const { notFound, conflict } = require("@hapi/boom");
 
 const createRandomProducts = require("../../data_faker/products_faker");
 
@@ -33,15 +34,16 @@ class ProductsService {
   }
 
   async findOne(id) {
-    const name = this.getTotal();
-    return this.products.find((item) => item.id === id);
+    const product = this.products.find((item) => item.id === id);
+    const blocked = faker.datatype.boolean();
+    if (!product) throw notFound(`Product with id=${id} not found`);
+    if (blocked) throw conflict(`Product is block`);
+    return product;
   }
 
   async update(id, changes) {
     const index = this.products.findIndex((item) => item.id === id);
-    if (index === -1) {
-      throw new Error("Product not found");
-    }
+    if (index === -1) throw notFound("Product not found");
     const product = this.products[index];
     this.products[index] = {
       ...product,
@@ -52,7 +54,7 @@ class ProductsService {
 
   async delete(id) {
     const index = this.products.findIndex((item) => item.id === id);
-    if (index === -1) throw new Error("Product not found");
+    if (index === -1) throw notFound("Product not found");
     this.products.splice(index, 1);
   }
 }

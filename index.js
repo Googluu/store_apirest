@@ -3,7 +3,11 @@ const express = require("express");
 const routerApi = require("./app/server");
 // Importar middleware
 //importar las funciones que se uilizarán
-const { logErrors, errorHandler } = require("./app/middlewares/error.handler");
+const {
+  logErrors,
+  errorHandler,
+  boomErrorHandler,
+} = require("./app/middlewares/error.handler");
 
 const app = express();
 
@@ -19,6 +23,7 @@ routerApi(app);
 
 // Utilizamos los middleware. Siempre deben ir después del routing:
 app.use(logErrors);
+app.use(boomErrorHandler);
 app.use(errorHandler);
 
 app.listen(port, () => {
