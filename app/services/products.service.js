@@ -16,7 +16,7 @@ class ProductsService {
     }
   }
 
-  async create(data) {
+  create(data) {
     const newProduct = {
       id: faker.datatype.uuid(),
       ...data,
