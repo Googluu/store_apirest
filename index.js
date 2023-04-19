@@ -8,6 +8,7 @@ const {
   logErrors,
   errorHandler,
   boomErrorHandler,
+  errorHandlerSequelize,
 } = require("./app/middlewares/error.handler");
 
 const app = express();
@@ -26,6 +27,7 @@ routerApi(app);
 // Utilizamos los middleware. Siempre deben ir después del routing:
 app.use(logErrors);
 app.use(boomErrorHandler);
+app.use(errorHandlerSequelize);
 app.use(errorHandler);
 
 app.listen(port, () => {

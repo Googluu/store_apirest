@@ -1,21 +1,23 @@
 const Joi = require("joi");
 
-const userSchema = Joi.object({
-  id: Joi.number().integer().required(),
-  email: Joi.string().email().required(),
-  password: Joi.string().required(),
-  rol: Joi.string().valid("admin", "user").required(),
+const id = Joi.number().integer();
+const email = Joi.string().email();
+const password = Joi.string();
+// rol: Joi.string().valid("admin", "customer").required(),
+
+const createUser = Joi.object({
+  email: email.required(),
+  password: password.required(),
 });
 
-const createUser = (userData) => userSchema.validate(userData);
+const updateUser = Joi.object({
+  email: email,
+  password: password,
+});
 
-const updateUser = (userData) =>
-  userSchema.validate(userData, { abortEarly: false });
-
-const findUserById = (userId) => {
-  const schema = Joi.object({ id: Joi.number().integer().required() });
-  return schema.validate({ id: userId });
-};
+const findUserById = Joi.object({
+  id: id.required(),
+});
 
 module.exports = {
   createUser,
