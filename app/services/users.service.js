@@ -1,5 +1,3 @@
-const getConnection = require("../../libs/postgres");
-
 class UsersService {
   constructor() {
     this.users = [];
@@ -10,9 +8,7 @@ class UsersService {
   }
 
   async findAll() {
-    const client = await getConnection();
-    const response = await client.query("SELECT * FROM tasks");
-    return response.rows;
+    return [];
   }
 
   async findOne(id) {
