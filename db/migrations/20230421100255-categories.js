@@ -8,7 +8,7 @@ module.exports = {
     await queryInterface.createTable(CATEGORY_TABLE, CategorySchema);
   },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.drop(CATEGORY_TABLE);
+  async down(queryInterface) {
+    await queryInterface.dropTable(CATEGORY_TABLE);
   },
 };
