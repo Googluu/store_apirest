@@ -1,21 +1,22 @@
 const Joi = require("joi");
 
-const categoriesSchema = Joi.object({
-  id: Joi.number().integer().required(),
-  name: Joi.string().min(3).max(15),
-  image: Joi.string().uri().required(),
+const id = Joi.number().integer();
+const name = Joi.string().min(3).max(15);
+const image = Joi.string().uri();
+
+const createCategory = Joi.object({
+  name: name.required(),
+  image: image.required(),
 });
 
-const createCategory = (categoryData) =>
-  categoriesSchema.validate(categoryData);
+const updateCategory = Joi.object({
+  name: name,
+  image: image,
+});
 
-const updateCategory = (categoryData) =>
-  categoriesSchema.validate(categoryData, { abortEarly: false });
-
-const findCategoryById = (categoryId) => {
-  const schema = Joi.object({ id: Joi.number().integer().required() });
-  return schema.validate({ id: categoryId });
-};
+const findCategoryById = Joi.object({
+  id: id.required(),
+});
 
 module.exports = {
   createCategory,
