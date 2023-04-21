@@ -7,12 +7,12 @@ module.exports = {
   async up(queryInterface) {
     await queryInterface.addColumn(
       PRODUCT_TABLE,
-      "categoryId",
+      "category_id",
       ProductSchema.categoryId
     );
   },
 
   async down(queryInterface) {
-    await queryInterface.removeColumn(PRODUCT_TABLE, "categoryId");
+    await queryInterface.removeColumn(PRODUCT_TABLE, "category_id");
   },
 };
