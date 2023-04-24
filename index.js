@@ -4,6 +4,7 @@ const cors = require("cors");
 const routerApi = require("./app/server");
 // Importar middleware
 //importar las funciones que se uilizarán
+const { checkApiKey } = require("./app/middlewares/auth.handler");
 const {
   logErrors,
   errorHandler,
@@ -20,6 +21,10 @@ app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Welcome");
+});
+
+app.get("/new-route", checkApiKey, (req, res) => {
+  res.send("Welcome to new route!");
 });
 
 routerApi(app);
