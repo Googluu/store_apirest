@@ -3,18 +3,18 @@ const Joi = require("joi");
 const id = Joi.number().integer();
 const email = Joi.string().email();
 const password = Joi.string();
-const rol = Joi.string().valid("admin", "customer");
+const role = Joi.string().min(5);
 
 const createUser = Joi.object({
   email: email.required(),
   password: password.required(),
-  rol: rol.required(),
+  role: role.required(),
 });
 
 const updateUser = Joi.object({
   email: email,
   password: password,
-  rol: rol,
+  role: role,
 });
 
 const findUserById = Joi.object({
