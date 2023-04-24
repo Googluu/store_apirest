@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const passport = require("passport");
 
 const CategoriesService = require("../services/categories.service");
 const validatorHandler = require("../middlewares/validator.handler");
@@ -36,6 +37,7 @@ router.get(
 
 router.post(
   "/",
+  passport.authenticate("jwt", { session: false }),
   validatorHandler(createCategory, "body"),
   async (req, res, next) => {
     try {
@@ -50,6 +52,7 @@ router.post(
 
 router.patch(
   "/:id",
+  passport.authenticate("jwt", { session: false }),
   validatorHandler(findCategoryById, "params"),
   validatorHandler(updateCategory, "body"),
   async (req, res, next) => {
@@ -66,6 +69,7 @@ router.patch(
 
 router.delete(
   "/:id",
+  passport.authenticate("jwt", { session: false }),
   validatorHandler(findCategoryById, "params"),
   async (req, res, next) => {
     try {
