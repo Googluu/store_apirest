@@ -1,4 +1,4 @@
-const { unauthorized } = require("@hapi/boom");
+const { unauthorized, forbidden } = require("@hapi/boom");
 
 const { config } = require("../../config/config");
 
@@ -9,4 +9,12 @@ function checkApiKey(req, res, next) {
   } else next(unauthorized());
 }
 
-module.exports = { checkApiKey };
+function checkAdminRole(req, res, next) {
+  console.log(req.user);
+  const user = req.user;
+  if (user.role === "admin") {
+    next();
+  } else next(forbidden("se requieren permisos de administrador"));
+}
+
+module.exports = { checkApiKey, checkAdminRole };
