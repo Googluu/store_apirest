@@ -5,6 +5,8 @@ const config = {
   port: process.env.PORT || 3000,
   apikey: process.env.API_KEY,
   jwtSecret: process.env.JWT_SECRET,
+  nodeMailerUser: process.env.NODE_MAILER_AUTH_USER,
+  nodeMailerPass: process.env.NODE_MAILER_AUTH_PASS,
   dbPostgres: {
     dbUser: process.env.DB_USER,
     dbPassword: process.env.DB_PASSWORD,
