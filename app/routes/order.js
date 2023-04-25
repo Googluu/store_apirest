@@ -1,7 +1,9 @@
 const express = require("express");
+const passport = require("passport");
 
 const OrderService = require("../services/orders.service");
 const validatorHandler = require("../middlewares/validator.handler");
+const { checkRoles } = require("../middlewares/auth.handler");
 const {
   getOrderSchema,
   createOrderSchema,
@@ -27,6 +29,8 @@ router.get(
 
 router.post(
   "/",
+  passport.authenticate("jwt", { session: false }),
+  checkRoles("admin", "customer"),
   validatorHandler(createOrderSchema, "body"),
   async (req, res, next) => {
     try {

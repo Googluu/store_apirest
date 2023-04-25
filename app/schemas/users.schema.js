@@ -12,9 +12,9 @@ const createUser = Joi.object({
 });
 
 const updateUser = Joi.object({
-  email: email,
-  password: password,
-  role: role,
+  email,
+  password,
+  role,
 });
 
 const findUserById = Joi.object({
