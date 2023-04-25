@@ -1,7 +1,5 @@
 const Joi = require("joi");
 
-// const { createCategory, updateCategory } = require("../schemas/categories.schema");
-
 const id = Joi.number().integer();
 const name = Joi.string().min(3).max(15);
 const description = Joi.string().min(10);
@@ -24,11 +22,11 @@ const createProduct = Joi.object({
 });
 
 const updateProduct = Joi.object({
-  name: name,
-  description: description,
-  price: price,
-  image: image,
-  categoryId: categoryId,
+  name,
+  description,
+  price,
+  image,
+  categoryId,
 });
 
 const findProductById = Joi.object({
