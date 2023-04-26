@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 
+const { config } = require("./config/config");
+
 const routerApi = require("./app/server");
-// Importar middleware
-//importar las funciones que se uilizarán
 const { checkApiKey } = require("./app/middlewares/auth.handler");
 const {
   logErrors,
@@ -14,7 +14,7 @@ const {
 
 const app = express();
 
-const port = 3000;
+const port = config.port || 3000;
 
 app.use(express.json());
 app.use(cors());
@@ -31,7 +31,6 @@ app.get("/new-route", checkApiKey, (req, res) => {
 
 routerApi(app);
 
-// Utilizamos los middleware. Siempre deben ir después del routing:
 app.use(logErrors);
 app.use(boomErrorHandler);
 app.use(errorHandlerSequelize);
