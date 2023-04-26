@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const passport = require("passport");
 
 const { config } = require("./config/config");
 
@@ -18,6 +19,7 @@ const port = config.port || 3000;
 
 app.use(express.json());
 app.use(cors());
+app.use(passport.initialize());
 
 require("./utils/auth");
 
