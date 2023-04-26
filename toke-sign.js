@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const secret = "mydog";
 const payload = {
-  sub: 1,
+  sub: 1, // forma de identificar al usuario
   role: "customer2",
 };
 
