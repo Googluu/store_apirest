@@ -21,13 +21,10 @@ function boomErrorHandler(err, req, res, next) {
 }
 
 function errorHandlerSequelize(err, req, res, next) {
-  if (
-    err instanceof ValidationError ||
-    err.message === "SequelizeUniqueConstraintError"
-  ) {
+  if (err instanceof ValidationError) {
     res.status(409).json({
       statusCode: 409,
-      message: "El email ya existe en la base de datos",
+      message: err.message,
       errors: err.errors,
     });
   } else next(err);
