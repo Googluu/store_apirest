@@ -36,7 +36,7 @@ router.get(
       const product = await service.findOne(id);
       res.json(product);
     } catch (error) {
-      next(error); //se agrega el next para atrapar de forma explicita el error con el middleware
+      next(error);
     }
   }
 );

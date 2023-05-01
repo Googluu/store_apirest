@@ -3,6 +3,7 @@ require("dotenv").config();
 const config = {
   env: process.env.NODE_ENV || "dev",
   port: process.env.PORT || 3000,
+  uriPostgres: process.env.URI_POSTGRES,
   apikey: process.env.API_KEY,
   jwtSecret: process.env.JWT_SECRET,
   nodeMailerUser: process.env.NODE_MAILER_AUTH_USER,
