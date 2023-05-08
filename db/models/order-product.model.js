@@ -25,7 +25,7 @@ const OrderProductSchema = {
       key: "id",
     },
     onUpdate: "CASCADE",
-    onDelete: "SET NULL",
+    onDelete: "RESTRICT",
   },
   productId: {
     field: "product_id",
@@ -36,7 +36,7 @@ const OrderProductSchema = {
       key: "id",
     },
     onUpdate: "CASCADE",
-    onDelete: "SET NULL",
+    onDelete: "RESTRICT",
   },
   createdAt: {
     allowNull: false,

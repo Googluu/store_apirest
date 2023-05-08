@@ -20,7 +20,7 @@ const OrderSchema = {
       key: "id",
     },
     onUpdate: "CASCADE",
-    onDelete: "SET NULL",
+    onDelete: "RESTRICT",
   },
   createdAt: {
     allowNull: false,
