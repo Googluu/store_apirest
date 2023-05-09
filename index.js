@@ -3,6 +3,7 @@ const cors = require("cors");
 const passport = require("passport");
 
 const { config } = require("./config/config");
+const useGraphql = require("./app/graphql");
 
 const routerApi = require("./app/server");
 const { checkApiKey } = require("./app/middlewares/auth.handler");
@@ -32,6 +33,7 @@ app.get("/new-route", checkApiKey, (req, res) => {
 });
 
 routerApi(app);
+useGraphql(app);
 
 app.use(logErrors);
 app.use(boomErrorHandler);

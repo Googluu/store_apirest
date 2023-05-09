@@ -1,5 +1,13 @@
-import { ApolloServer } from "@apollo/server";
-import { startStandaloneServer } from "@apollo/server/standalone";
+// /graphql/index.js
+
+// Dependencia que crea un servidor
+const { ApolloServer } = require("@apollo/server");
+// Playground incluido en @apollo/server
+const {
+  ApolloServerPluginLandingPageLocalDefault,
+} = require("@apollo/server/plugin/landingPage/default");
+// Middleware de Express también en @apollo/server
+const { expressMiddleware } = require("@apollo/server/express4");
 
 const typeDefs = `
   type Query {
@@ -9,17 +17,28 @@ const typeDefs = `
 
 const resolvers = {
   Query: {
-    hello: () => "hola mundo",
+    hello: () => "Hola mundillo",
   },
 };
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-});
+const useGraphQL = async (app) => {
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    playground: true,
+    plugins: [ApolloServerPluginLandingPageLocalDefault],
+  });
 
-const { url } = await startStandaloneServer(server, {
-  listen: { port: 4000 },
-});
+  await server.start();
 
-console.log(`🚀  Server ready at: ${url}`);
+  // Uso del middleware en Express
+  app.use(
+    expressMiddleware(server, {
+      context: async ({ req }) => ({
+        token: req.headers.token,
+      }),
+    })
+  );
+};
+
+module.exports = useGraphQL;
