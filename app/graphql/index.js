@@ -11,7 +11,7 @@ const { expressMiddleware } = require("@apollo/server/express4");
 
 const typeDefs = `
   type Query {
-    hello: String,
+    hello: String
     getPerson(name: String, age: Int): String
   }
 `;
