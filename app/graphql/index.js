@@ -11,13 +11,16 @@ const { expressMiddleware } = require("@apollo/server/express4");
 
 const typeDefs = `
   type Query {
-    hello: String
+    hello: String,
+    getPerson(name: String, age: Int): String
   }
 `;
 
 const resolvers = {
   Query: {
     hello: () => "Hola mundillo",
+    getPerson: (_, { name, age }) =>
+      `Hello, my name is ${name}, I'm ${age} years old`,
   },
 };
 
