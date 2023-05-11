@@ -11,13 +11,14 @@ const { expressMiddleware } = require("@apollo/server/express4");
 
 const typeDefs = `
   type Query {
-    hello: String
+    hello: String!
     getPerson(name: String, age: Int): String
-    getInt(age: Int): Int
+    getInt(age: Int!): Int
     getFloat(price: Float): Float
     getString: String
     getBoolean: Boolean
     getID: ID
+    getNumbers(numbers: [Int!]!): [Int]
   }
 `;
 
@@ -31,6 +32,7 @@ const resolvers = {
     getString: () => "palabra",
     getBoolean: () => true,
     getID: () => "1212",
+    getNumbers: (_, { numbers }) => numbers,
   },
 };
 
