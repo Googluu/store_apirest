@@ -2,15 +2,15 @@ const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
 
-const routerApi = require("./app/server");
-const useGraphql = require("./app/graphql");
-const { checkApiKey } = require("./app/middlewares/auth.handler");
+const routerApi = require("./server");
+const useGraphql = require("./graphql");
+const { checkApiKey } = require("./middlewares/auth.handler");
 const {
   logErrors,
   errorHandler,
   boomErrorHandler,
   errorHandlerSequelize,
-} = require("./app/middlewares/error.handler");
+} = require("./middlewares/error.handler");
 
 const createApp = async () => {
   const app = express();
@@ -19,7 +19,7 @@ const createApp = async () => {
   app.use(cors());
   app.use(passport.initialize());
 
-  require("./utils/auth");
+  require("../utils/auth");
 
   app.get("/", (req, res) => {
     res.send("Welcome");
