@@ -1,4 +1,4 @@
-const express = require("express");
+const { Router } = require("express");
 const passport = require("passport");
 
 const ProductsService = require("../services/products.service");
@@ -11,8 +11,9 @@ const {
   queryProductSchema,
 } = require("../schemas/products.schema");
 
-const router = express.Router();
 const service = new ProductsService();
+
+const router = Router();
 
 router.get(
   "/",

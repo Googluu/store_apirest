@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
 
-const routerApi = require("./server");
+const { routerApi } = require("./server");
 const useGraphql = require("./graphql");
 const { checkApiKey } = require("./middlewares/auth.handler");
 const {
