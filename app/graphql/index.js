@@ -8,29 +8,7 @@ const {
 } = require("@apollo/server/plugin/landingPage/default");
 // Middleware de Express también en @apollo/server
 const { expressMiddleware } = require("@apollo/server/express4");
-
-const typeDefs = `
-  type Query {
-    hello: String!
-    getPerson(name: String, age: Int): String
-    getInt(age: Int!): Int
-    getFloat(price: Float): Float
-    getString: String
-    getBoolean: Boolean
-    getID: ID
-    getNumbers(numbers: [Int!]!): [Int]
-    getProduct: Product
-  }
-
-  type Product {
-    id: ID!
-    name: String!
-    price: Float!
-    description: String!
-    image: String!
-    createdAt: String!
-  }
-`;
+const { loadFiles } = require("@graphql-tools/load-files");
 
 const resolvers = {
   Query: {
@@ -58,7 +36,7 @@ const resolvers = {
 
 const useGraphQL = async (app) => {
   const server = new ApolloServer({
-    typeDefs,
+    typeDefs: await loadFiles("./app/**/*.graphql"),
     resolvers,
     playground: true,
     plugins: [ApolloServerPluginLandingPageLocalDefault],
