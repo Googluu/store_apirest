@@ -10,29 +10,7 @@ const {
 const { expressMiddleware } = require("@apollo/server/express4");
 const { loadFiles } = require("@graphql-tools/load-files");
 
-const resolvers = {
-  Query: {
-    hello: () => "Hola mundillo",
-    getPerson: (_, { name, age }) =>
-      `Hello, my name is ${name}, I'm ${age} years old`,
-    getInt: (_, { age }) => age,
-    getFloat: (_, { price }) => price,
-    getString: () => "palabra",
-    getBoolean: () => true,
-    getID: () => "1212",
-    getNumbers: (_, { numbers }) => numbers,
-    getProduct: () => {
-      return {
-        id: "1212",
-        name: "Product 1",
-        price: 100.16,
-        description: "bla bla bla",
-        image: "http://image.sas",
-        createdAt: new Date().toISOString(),
-      };
-    },
-  },
-};
+const resolvers = require("./resolvers");
 
 const useGraphQL = async (app) => {
   const server = new ApolloServer({
