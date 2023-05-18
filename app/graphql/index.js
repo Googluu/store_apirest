@@ -19,6 +19,16 @@ const typeDefs = `
     getBoolean: Boolean
     getID: ID
     getNumbers(numbers: [Int!]!): [Int]
+    getProduct: Product
+  }
+
+  type Product {
+    id: ID!
+    name: String!
+    price: Float!
+    description: String!
+    image: String!
+    createdAt: String!
   }
 `;
 
@@ -33,6 +43,16 @@ const resolvers = {
     getBoolean: () => true,
     getID: () => "1212",
     getNumbers: (_, { numbers }) => numbers,
+    getProduct: () => {
+      return {
+        id: "1212",
+        name: "Product 1",
+        price: 100.16,
+        description: "bla bla bla",
+        image: "http://image.sas",
+        createdAt: new Date().toISOString(),
+      };
+    },
   },
 };
 
