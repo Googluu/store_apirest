@@ -1,11 +1,11 @@
-const { unauthorized } = require("@hapi/boom");
-
+const { checkRolesGql } = require("../../utils/checkRolesGql");
+const { checktJwtGql } = require("../../utils/checkJwt");
 const CategoriesService = require("../services/categories.service");
 const service = new CategoriesService();
 
 const addCategory = async (_, { dto }, context) => {
-  const { user } = await context.authenticate("jwt", { session: false });
-  if (!user) throw unauthorized(`jwt is not valid`);
+  const user = await checktJwtGql(context);
+  checkRolesGql(user, "admin");
   return service.create(dto);
 };
 

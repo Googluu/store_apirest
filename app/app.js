@@ -19,7 +19,7 @@ const createApp = async () => {
   app.use(cors());
   app.use(passport.initialize());
 
-  require("../utils/auth");
+  require("../utils/");
 
   app.get("/", (req, res) => {
     res.send("Welcome");
