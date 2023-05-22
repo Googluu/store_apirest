@@ -6,7 +6,11 @@ const service = new CategoriesService();
 const addCategory = async (_, { dto }, context) => {
   const user = await checktJwtGql(context);
   checkRolesGql(user, "admin");
-  return service.create(dto);
+  console.log(dto);
+  return service.create({
+    ...dto,
+    image: dto.image.href,
+  });
 };
 
 module.exports = {
