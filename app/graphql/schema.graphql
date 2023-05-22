@@ -23,7 +23,15 @@ type Product {
   price: Float!
   description: String!
   image: String!
+  categoryId: ID!
   createdAt: String!
+  category: Category!
+}
+
+type Category {
+  id: ID!
+  name: String!
+  image: String!
 }
 
 input CreateProductDto {
