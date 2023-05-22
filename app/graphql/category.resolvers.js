@@ -13,6 +13,16 @@ const addCategory = async (_, { dto }, context) => {
   });
 };
 
+const getCategory = (_, { id }) => {
+  return service.findOne(id);
+};
+
+const getAllCategory = () => {
+  return service.findAll();
+};
+
 module.exports = {
   addCategory,
+  getCategory,
+  getAllCategory,
 };
