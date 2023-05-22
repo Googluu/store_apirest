@@ -9,6 +9,7 @@ const {
 // Middleware de Express también en @apollo/server
 const { expressMiddleware } = require("@apollo/server/express4");
 const { loadFiles } = require("@graphql-tools/load-files");
+const { buildContext } = require("graphql-passport");
 
 const resolvers = require("./resolvers");
 
@@ -25,9 +26,12 @@ const useGraphQL = async (app) => {
   // Uso del middleware en Express
   app.use(
     expressMiddleware(server, {
-      context: async ({ req }) => ({
-        token: req.headers.token,
-      }),
+      context: async ({ req, res }) =>
+        buildContext({
+          token: req.headers.token,
+          req,
+          res,
+        }),
     })
   );
 };
