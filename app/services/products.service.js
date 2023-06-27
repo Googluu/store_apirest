@@ -56,6 +56,9 @@ class ProductsService {
     const product = await this.findOne(id);
     await product.destroy();
   }
+  async getByCategory(id) {
+    return await models.Product.findAll({ where: { categoryId: id } });
+  }
 }
 
 module.exports = ProductsService;

@@ -8,8 +8,9 @@ const {
   findCustomerById,
 } = require("../schemas/customer.schema");
 
-const router = Router();
 const service = new CustomerService();
+
+const router = Router();
 
 router.get("/", async (req, res, next) => {
   try {

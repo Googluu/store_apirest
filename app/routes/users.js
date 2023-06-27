@@ -8,8 +8,9 @@ const {
   findUserById,
 } = require("../schemas/users.schema");
 
-const router = Router();
 const service = new UsersService();
+
+const router = Router();
 
 router.get("/", async (req, res) => {
   const users = await service.findAll();

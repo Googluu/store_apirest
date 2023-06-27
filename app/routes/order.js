@@ -1,4 +1,4 @@
-const express = require("express");
+const { Router } = require("express");
 const passport = require("passport");
 
 const OrderService = require("../services/orders.service");
@@ -10,8 +10,9 @@ const {
   addItemSchema,
 } = require("../schemas/order.schema");
 
-const router = express.Router();
 const service = new OrderService();
+
+const router = Router();
 
 router.get(
   "/:id",

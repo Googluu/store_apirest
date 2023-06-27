@@ -10,8 +10,9 @@ const {
   findCategoryById,
 } = require("../schemas/categories.schema");
 
-const router = Router();
 const service = new CategoriesService();
+
+const router = Router();
 
 router.get("/", async (req, res, next) => {
   try {
