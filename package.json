@@ -24,7 +24,7 @@
     "sequelize-cli": "^6.6.0"
   },
   "dependencies": {
-    "@apollo/server": "^4.7.1",
+    "@apollo/server": "^4.7.4",
     "@faker-js/faker": "^7.6.0",
     "@graphql-tools/load-files": "^6.6.1",
     "@hapi/boom": "^10.0.1",
