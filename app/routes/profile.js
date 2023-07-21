@@ -3,8 +3,9 @@ const passport = require("passport");
 
 const OrderService = require("../services/orders.service");
 
-const router = Router();
 const service = new OrderService();
+
+const router = Router();
 
 router.get(
   "/my-orders",
